@@ -1,39 +1,11 @@
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Set;
 
-class Address {
-    private String country;
-    private String city;
-
-    public Address(String country, String city) {
-        this.country = country;
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Address address = (Address) o;
-        return Objects.equals(country, address.country) &&
-                Objects.equals(city, address.city);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(country, city);
-    }
-}
 
 public class Main {
     public static void main(String[] args) {
@@ -46,6 +18,8 @@ public class Main {
         costPerAddress.put(new Address("Россия", "Казань"), 200);
         costPerAddress.put(new Address("США", "Нью-Йорк"), 500);
         costPerAddress.put(new Address("Германия", "Берлин"), 300);
+
+        Set<String> uniqueCountries = new HashSet<>();
 
         int totalCost = 0;
 
@@ -75,8 +49,11 @@ public class Main {
             int deliveryCost = pricePerKg * weight;
             totalCost += deliveryCost;
 
+            uniqueCountries.add(country);
+
             System.out.println("Стоимость доставки составит: " + deliveryCost + " руб.");
             System.out.println("Общая стоимость доставок: " + totalCost + "руб.");
+            System.out.println("Количество уникальных стран: " + uniqueCountries.size());
         }
     }
 }
